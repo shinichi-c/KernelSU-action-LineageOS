@@ -39,13 +39,19 @@ jobs:
           export CROSS_COMPILE_ARM32=arm-linux-androideabi-
           output_dir=out
           pushd android_kernel_oneplus_sdm845
-          echo "CONFIG_KPROBES=y
-          CONFIG_HAVE_KPROBES=y
-          CONFIG_KPROBE_EVENTS=y
-          CONFIG_SECURITY_SELINUX_DEVELOP=y
-          CONFIG_SAMPLE_KPROBES=y
-          CONFIG_SAMPLE_KRETPROBES=y" >> arch/arm64/configs/${{env.KERNEL_DEFCONFIG}}
-          sudo cp -r ../Tools/file security/selinux/hooks.c
+          echo "CONFIG_KPROBES=n
+          CONFIG_HAVE_KPROBES=n
+          CONFIG_KPROBE_EVENTS=n
+          CONFIG_SECURITY_SELINUX_DEVELOP=n
+          CONFIG_SAMPLE_KPROBES=n
+          CONFIG_SAMPLE_KRETPROBES=n" >> arch/arm64/configs/${{env.KERNEL_DEFCONFIG}}
+          sudo cp -r ../Tools/input.c drivers/input/input.c
+          sudo cp -r ../Tools/inode.c fs/devpts/inode.c
+          sudo cp -r ../Tools/exec.c fs/exec.c
+          sudo cp -r ../Tools/namespace.c fs/namespace.c
+          sudo cp -r ../Tools/open.c fs/open.c
+          sudo cp -r ../Tools/read_write.c fs/read_write.c
+          sudo cp -r ../Tools/stat.c fs/stat.c
           curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s ${{env.KERNELSU_TAG}}
           make O="$output_dir" ${{env.KERNEL_DEFCONFIG}}
           make -j $(nproc) O="$output_dir" CC="ccache clang"
@@ -55,7 +61,7 @@ jobs:
           
       - name: Resource organization
         run: |
-          sudo mv android_kernel_oneplus_sdm845/out/arch/arm64/boot/Image.gz-dtb anykernel/
+          sudo mv android_kernel_oneplus_sdm845/out/arch/arm64/boot/Image-dtb anykernel/
           cd anykernel/
           sed -i 's/crdroid-13.0/${{env.ROM_NAME}}/g' anykernel.sh
 
