@@ -39,7 +39,26 @@ jobs:
           export CROSS_COMPILE_ARM32=arm-linux-androideabi-
           output_dir=out
           pushd android_kernel_oneplus_sdm845
-          echo "CONFIG_KSU=y" >> arch/arm64/configs/${{env.KERNEL_DEFCONFIG}}
+          echo "CONFIG_KSU=y
+          CONFIG_NF_NAT_IPV6=y
+CONFIG_IP6_NF_TARGET_MASQUERADE=y
+CONFIG_NETFILTER_XT_TARGET_CHECKSUM=y
+CONFIG_FHANDLE=y
+CONFIG_UNIX_DIAG=y
+CONFIG_PACKET_DIAG=y
+CONFIG_NETLINK_DIAG=y
+CONFIG_MACVLAN=y
+CONFIG_IPVLAN=y
+CONFIG_BRIDGE_VLAN_FILTERING=y
+CONFIG_VLAN_8021Q=y
+CONFIG_CHECKPOINT_RESTORE=y
+CONFIG_CGROUP_DEVICE=y
+CONFIG_IPC_NS=y
+CONFIG_PID_NS=y
+CONFIG_SYSVIPC=y
+CONFIG_UTS_NS=y
+CONFIG_USER_NS=y
+CONFIG_NET_NS=y" >> arch/arm64/configs/${{env.KERNEL_DEFCONFIG}}
           sudo cp -r ../Tools/input.c drivers/input/input.c
           sudo cp -r ../Tools/inode.c fs/devpts/inode.c
           sudo cp -r ../Tools/exec.c fs/exec.c
