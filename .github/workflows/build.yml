@@ -42,12 +42,8 @@ jobs:
           echo "CONFIG_KSU=y
           CONFIG_NF_NAT_IPV6=y
           CONFIG_IP6_NF_TARGET_MASQUERADE=y
-          CONFIG_INET=y
-          CONFIG_IP6_NF_IPTABLES=y
           CONFIG_IP6_NF_NAT=y
           CONFIG_IPV6=y
-          CONFIG_NET=y
-          CONFIG_NETFILTER=y
           CONFIG_NETFILTER_XT_TARGET_CHECKSUM=y
           CONFIG_FHANDLE=y
           CONFIG_UNIX_DIAG=y
