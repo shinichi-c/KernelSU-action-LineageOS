@@ -52,7 +52,7 @@ jobs:
           sudo cp -r ../Tools/open.c fs/open.c
           sudo cp -r ../Tools/read_write.c fs/read_write.c
           sudo cp -r ../Tools/stat.c fs/stat.c
-          curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s ${{env.KERNELSU_TAG}}
+          curl -LSs "curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/main/kernel/setup.sh" | bash -s ${{env.KERNELSU_TAG}}
           make O="$output_dir" ${{env.KERNEL_DEFCONFIG}}
           make -j $(nproc) O="$output_dir" CC="ccache clang"
           popd
