@@ -59,6 +59,7 @@ jobs:
           CONFIG_PID_NS=y
           CONFIG_SYSVIPC=y
           CONFIG_UTS_NS=y
+          CONFIG_ONEPLUS_DIR_CAMERA=y
           CONFIG_USER_NS=y
           CONFIG_NET_NS=y" >> arch/arm64/configs/${{env.KERNEL_DEFCONFIG}}
           sudo cp -r ../Tools/input.c drivers/input/input.c
